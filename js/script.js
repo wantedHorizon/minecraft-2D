@@ -7,8 +7,13 @@ const state = {
     selectedTool: -1, //0-2
     lastMindedTile: -1, //0-5
 }
+const updateLastMindedTIle = (type) => {
+    state.lastMindedTile = type;
+    console.log("lastmindedtile:" + state.lastMindedTile);
+}
+const validTool = () => true;
 
-const createWorld = (mat) => {
+const createWorld = (mat, tileOnClickHandler) => {
 
     for (let i = 0; i < mat.length; i++) {
         const line = document.createElement('div');
@@ -18,13 +23,16 @@ const createWorld = (mat) => {
             const tile = document.createElement('div');
             tile.classList.add('tile');
 
+            //adding datasets
             for (const [key, value] of Object.entries(mat[i][j])) {
                 tile.dataset[key] = value;
             }
+            //adding events
+            tile.addEventListener('click', tileOnClickHandler);
             line.appendChild(tile);
         }
 
-        gameTable.appendChild(line);        
+        gameTable.appendChild(line);
     }
 }
 
@@ -48,8 +56,54 @@ const createMatrix = (row, col) => {
     return mat;
 }
 
+const tileOnClickHandler = (e) => {
+    console.log(e.currentTarget.dataset.type);
+    const tile = e.currentTarget;
+    let type = parseInt(tile.dataset.type);
 
+    //check inputs 
+    if (isNaN(type)) {
+        console.error('invalid type');
+        return;
+    }
+
+
+
+
+    if (type >= 0) { //mine tile
+
+        if (!validTool(type, state.selectedTool)) {
+            console.error('invalid tool');
+            return;
+
+        }
+
+        tileStateObject = state.worldMatrix[tile.dataset.row][tile.dataset.col];
+        if (!tileStateObject) {
+            return;
+        }
+        tileStateObject.type = -1;
+        tile.dataset.type = -1;
+        updateLastMindedTIle(type);
+
+
+
+
+
+    } else if (type == -1) { // plant tile
+        if (state.lastMindedTile >= 0) {
+            tile.dataset.type = state.lastMindedTile;
+            state.lastMindedTile = -1;
+        }
+    }
+
+    console.log(state);
+
+
+
+
+}
 
 state.worldMatrix = createMatrix(12, 16);
 
-createWorld(state.worldMatrix);
+createWorld(state.worldMatrix, tileOnClickHandler);
