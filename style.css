@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.wrapper {
+    width: 100%;
+    background: #f6f6f6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+/* tools */
+
+.row {
+    display: flex;
+}
+
+
+/* game area */
+
+.game-area {
+    height: 100vh;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-area__game {
+    height: 600px;
+    background: red;
+    width: 800px;
+}
+
+/* tile options */
+.tile {
+    width: 50px;
+    height: 50px;
+    background: lightblue;
+    /* border: 2px solid yellow; */
+}
+
+
+.tile[data-type="-1"] {
+    background: lightblue;
+
+
+}
+
+.tile[data-type="0"] {
+    background: url('./img/dirt.jpg');
+
+}
+
+.tile[data-type="1"] {
+    background: url('./img/dirt-grass.jpg');
+
+}
+
+.tile[data-type="2"] {
+    background: url('./img/leaves.jpg');
+
+}
+
+.tile[data-type="3"] {
+    background: url('./img/wood.jpg');
+
+}
+
+.tile[data-type="4"] {
+    background: url('./img/rock.jpg');
+
+}
+
+.tile[data-type="5"] {
+    background: url('./img/water.jpg');
+
+}
+
+
+
+/* tools-sidebar */
+
+.tools-sidebar {
+    background: #333333;
+    width: 20%;
+    /* height: 100vh; */
+}
