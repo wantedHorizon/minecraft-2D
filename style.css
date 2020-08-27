@@ -56,6 +56,10 @@ body {
     /* border: 2px solid yellow; */
 }
 
+.tile:hover {
+    border: 1px solid white;
+}
+
 
 .tile[data-type="-1"] {
     background: lightblue;
@@ -110,8 +114,24 @@ body {
     padding-bottom: 2px;
     text-align: center;
     width: 50%;
-    font-size: 0.8rem;
+    font-size: 0.9em;
+    /* font-weight: 700; */
     border: 2px solid white;
+    transition: background 0.5s ease-in-out;
+}
+
+.tool:hover {
+    background: blue;
+}
+
+.tool.active {
+    background: blue;
+    opacity: 0.7;
+}
+
+.tool.active.warning {
+    background: red;
+    opacity: 0.7;
 }
 
 .tool .img {
@@ -152,6 +172,37 @@ body {
     border: 2px solid white;
 }
 
+.tools-sidebar__lastMindedTile[data-type="-1"] {
+    background: transparent;
+
+}
+
 .tools-sidebar__lastMindedTile[data-type="0"] {
+    background: url('./img/tiles/dirt.jpg');
+
+}
+
+.tools-sidebar__lastMindedTile[data-type="1"] {
+    background: url('./img/tiles/dirt-grass.jpg');
+
+}
+
+.tools-sidebar__lastMindedTile[data-type="2"] {
+    background: url('./img/tiles/leaves.jpg');
+
+}
+
+.tools-sidebar__lastMindedTile[data-type="3"] {
+    background: url('./img/tiles/wood.jpg');
+
+}
+
+.tools-sidebar__lastMindedTile[data-type="4"] {
+    background: url('./img/tiles/rock.jpg');
+
+}
+
+.tools-sidebar__lastMindedTile[data-type="5"] {
     background: url('./img/tiles/water.jpg');
+
 }
