@@ -4,6 +4,19 @@
     box-sizing: border-box;
 }
 
+
+@font-face {
+    font-family: 'mincraft';
+    src: url('./Minecraft.ttf');
+    font-weight: bold;
+
+}
+
+body {
+    font-family: 'mincraft', Arial, Helvetica, sans-serif;
+
+}
+
 .wrapper {
     width: 100%;
     background: #f6f6f6;
@@ -51,32 +64,32 @@
 }
 
 .tile[data-type="0"] {
-    background: url('./img/dirt.jpg');
+    background: url('./img/tiles/dirt.jpg');
 
 }
 
 .tile[data-type="1"] {
-    background: url('./img/dirt-grass.jpg');
+    background: url('./img/tiles/dirt-grass.jpg');
 
 }
 
 .tile[data-type="2"] {
-    background: url('./img/leaves.jpg');
+    background: url('./img/tiles/leaves.jpg');
 
 }
 
 .tile[data-type="3"] {
-    background: url('./img/wood.jpg');
+    background: url('./img/tiles/wood.jpg');
 
 }
 
 .tile[data-type="4"] {
-    background: url('./img/rock.jpg');
+    background: url('./img/tiles/rock.jpg');
 
 }
 
 .tile[data-type="5"] {
-    background: url('./img/water.jpg');
+    background: url('./img/tiles/water.jpg');
 
 }
 
@@ -87,5 +100,47 @@
 .tools-sidebar {
     background: #333333;
     width: 20%;
+    padding: 50px 10px;
+    color: white;
     /* height: 100vh; */
+}
+
+.tool {
+    padding: 10px;
+    padding-bottom: 2px;
+    text-align: center;
+    width: 50%;
+    font-size: 0.8rem;
+    border: 2px solid white;
+}
+
+.tool .img {
+    height: 80%;
+    width: 80%;
+    margin: 0 auto;
+
+    background: white;
+}
+
+.tool[data-tool="1"]>.img {
+    background: url('./img/tools/shovel.png') no-repeat center center/cover;
+}
+
+.tool[data-tool="0"]>.img {
+    background: url('./img/tools/pickaxe.png') no-repeat center center/cover;
+}
+
+.tool[data-tool="2"]>.img {
+    background: url('./img/tools/axe.png') no-repeat center center/cover;
+}
+
+
+
+.tools-sidebar__toolsList {
+    display: grid;
+    justify-items: center;
+    grid-gap: 2rem;
+    width: 80%;
+    height: 60%;
+    margin: auto;
 }
