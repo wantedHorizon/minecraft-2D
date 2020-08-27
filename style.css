@@ -141,6 +141,17 @@ body {
     justify-items: center;
     grid-gap: 2rem;
     width: 80%;
-    height: 60%;
+    height: 100%;
     margin: auto;
+}
+
+.tools-sidebar__lastMindedTile {
+    width: 25%;
+    height: 50px;
+    /* align-self: flex-end; */
+    border: 2px solid white;
+}
+
+.tools-sidebar__lastMindedTile[data-type="0"] {
+    background: url('./img/tiles/water.jpg');
 }
