@@ -1,20 +1,17 @@
-* {
+*, *::after, *::before {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-
 @font-face {
     font-family: 'mincraft';
     src: url('./Minecraft.ttf');
     font-weight: bold;
-
 }
 
 body {
     font-family: 'mincraft', Arial, Helvetica, sans-serif;
-
 }
 
 .wrapper {
@@ -29,81 +26,75 @@ body {
 
 .row {
     display: flex;
+    flex-wrap: nowrap;
 }
-
 
 /* game area */
 
 .game-area {
-    height: 100vh;
-    width: 80%;
+    /* height: 100vh; */
+    width: 80vw;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .game-area__game {
-    height: 600px;
-    background: red;
-    width: 800px;
+    /* height: 600px; */
+    background: transparent;
+    width: 80%;
+    justify-content: center;
 }
 
+.game-area__game .row {}
+
 /* tile options */
+
 .tile {
-    width: 50px;
-    height: 50px;
-    background: lightblue;
-    /* border: 2px solid yellow; */
+    /* flex: 1; */
+    height: 8vh;
+    width: 8vh;
+    /* height: 50px; */
+    background: lightblue no-repeat center center/cover;
 }
 
 .tile:hover {
     border: 1px solid white;
 }
 
-
 .tile[data-type="-1"] {
     background: lightblue;
-
-
 }
 
 .tile[data-type="0"] {
-    background: url('./img/tiles/dirt.jpg');
-
+    background: url('./img/tiles/dirt.jpg') no-repeat center center/cover;
 }
 
 .tile[data-type="1"] {
-    background: url('./img/tiles/dirt-grass.jpg');
-
+    background: url('./img/tiles/dirt-grass.jpg') no-repeat center center/cover;
 }
 
 .tile[data-type="2"] {
-    background: url('./img/tiles/leaves.jpg');
-
+    background: url('./img/tiles/leaves.jpg') no-repeat center center/cover;
 }
 
 .tile[data-type="3"] {
-    background: url('./img/tiles/wood.jpg');
-
+    background: url('./img/tiles/wood.jpg') no-repeat center center/cover;
 }
 
 .tile[data-type="4"] {
-    background: url('./img/tiles/rock.jpg');
-
+    background: url('./img/tiles/rock.jpg') no-repeat center center/cover;
 }
 
 .tile[data-type="5"] {
-    background: url('./img/tiles/water.jpg');
-
+    background: url('./img/tiles/water.jpg') no-repeat center center/cover;
 }
-
-
 
 /* tools-sidebar */
 
 .tools-sidebar {
     background: #333333;
-    width: 20%;
+    width: 20vw;
     padding: 50px 10px;
     color: white;
     /* height: 100vh; */
@@ -138,23 +129,21 @@ body {
     height: 80%;
     width: 80%;
     margin: 0 auto;
-
     background: white;
+    background-size: contain;
 }
 
 .tool[data-tool="1"]>.img {
-    background: url('./img/tools/shovel.png') no-repeat center center/cover;
+    background: url('./img/tools/shovel.png') no-repeat center center/contain;
 }
 
 .tool[data-tool="0"]>.img {
-    background: url('./img/tools/pickaxe.png') no-repeat center center/cover;
+    background: url('./img/tools/pickaxe.png') no-repeat center center/contain;
 }
 
 .tool[data-tool="2"]>.img {
-    background: url('./img/tools/axe.png') no-repeat center center/cover;
+    background: url('./img/tools/axe.png') no-repeat center center/contain;
 }
-
-
 
 .tools-sidebar__toolsList {
     display: grid;
@@ -166,43 +155,36 @@ body {
 }
 
 .tools-sidebar__lastMindedTile {
-    width: 25%;
-    height: 50px;
+    width: 8vh;
+    height: 8vh;
     /* align-self: flex-end; */
     border: 2px solid white;
 }
 
 .tools-sidebar__lastMindedTile[data-type="-1"] {
     background: transparent;
-
 }
 
 .tools-sidebar__lastMindedTile[data-type="0"] {
-    background: url('./img/tiles/dirt.jpg');
-
+    background: url('./img/tiles/dirt.jpg') no-repeat center center/cover;
 }
 
 .tools-sidebar__lastMindedTile[data-type="1"] {
-    background: url('./img/tiles/dirt-grass.jpg');
-
+    background: url('./img/tiles/dirt-grass.jpg') no-repeat center center/cover;
 }
 
 .tools-sidebar__lastMindedTile[data-type="2"] {
-    background: url('./img/tiles/leaves.jpg');
-
+    background: url('./img/tiles/leaves.jpg') no-repeat center center/cover;
 }
 
 .tools-sidebar__lastMindedTile[data-type="3"] {
-    background: url('./img/tiles/wood.jpg');
-
+    background: url('./img/tiles/wood.jpg') no-repeat center center/cover;
 }
 
 .tools-sidebar__lastMindedTile[data-type="4"] {
-    background: url('./img/tiles/rock.jpg');
-
+    background: url('./img/tiles/rock.jpg') no-repeat center center/cover;
 }
 
 .tools-sidebar__lastMindedTile[data-type="5"] {
-    background: url('./img/tiles/water.jpg');
-
+    background: url('./img/tiles/water.jpg') no-repeat center center/cover;
 }

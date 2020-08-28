@@ -12,33 +12,8 @@ const state = {
     lastMindedTile: -1, //0-dirt , 1-dirt-grass , 2- leaves, 3- wood, 4-rock ,5-water
 }
 
-const updateLastMindedTIle = (type) => {
-    state.lastMindedTile = type;
-    lastMindedTileElement.dataset.type = type;
-}
-//validate tool can mine element
-const validTool = (type, selectedTool) => {
-    switch (selectedTool) {
-        case 0: //p0-pickaxe => rock(4)i
-            if (type == 4) return true;
-            break;
-        case 1: // 1-shovel => dirt,dirt-grass(0,1)
-            if (type == 0 || type == 1) return true;
-            break;
-        case 2: // 2-axe => leaves,wood(2,3) 
-            if (type == 2 || type == 3) return true;
-            break;
-        default:
-            console.error("invalid tool number");
-            break;
-
-    }
-
-    return false;
-};
 
 const createWorld = (mat, tileOnClickHandler) => {
-
     for (let i = 0; i < mat.length; i++) {
         const line = document.createElement('div');
         line.classList.add('row');
@@ -80,12 +55,214 @@ const createMatrix = (row, col) => {
     return mat;
 }
 
+const createMatrix1 = (row, col) => {
+
+    let mat = [];
+    for (let i = 0; i < row; i++) {
+        const r = [];
+        for (let j = 0; j < col; j++) {
+            r.push({})
+
+        }
+        mat.push(r);
+    }
+
+
+    const dirtLevel = row - parseInt((Math.floor((Math.random() * 3) + 1) * 0.1) * row);
+    // const upperGroundLevel = row - dirtLevel + parseInt((Math.floor((Math.random() * 4) + 1) * 0.1) * row);
+
+    
+
+    for (let i = row - 1; i >= 0; i--) {
+
+        // debugger;
+        for (let j = 0; j < col; j++) {
+            const tile = {};
+            tile.col = j;
+            tile.row = i;
+            if (i >= dirtLevel) {
+                tile.type = 0;
+            } else if (i === dirtLevel - 1) {
+                tile.type = 1;
+                
+            } else if (i === dirtLevel - 2) {
+                if (j >= col - 2) {
+                    mat[i][j] = {
+                        type: -1,
+                        col: j,
+                        row: j
+                    };
+                    mat[i - 1][j] = {
+                        type: -1,
+                        col: j - 1,
+                        row: j
+                    };
+                    mat[i - 2][j] = {
+                        type: -1,
+                        col: j - 2,
+                        row: j
+                    };
+
+                } else {
+                    const rand = getRandom9();
+                    // console.log("rand",rand);
+                    mat[i - 2][j] = {
+                        type: rand[0],
+                        col: j - 2,
+                        row: i
+                    };
+                    mat[i - 2][j + 1] = {
+                        type: rand[1],
+                        col: j - 2,
+                        row: i + 1
+                    };
+                    mat[i - 2][j + 2] = {
+                        type: rand[2],
+                        col: j - 2,
+                        row: i + 2
+                    };
+                    mat[i - 1][j] = {
+                        type: rand[3],
+                        col: j - 1,
+                        row: i
+                    };
+                    mat[i - 1][j + 1] = {
+                        type: rand[4],
+                        col: j - 1,
+                        row: i + 1
+                    };
+                    mat[i - 1][j + 2] = {
+                        type: rand[5],
+                        col: j - 1,
+                        row: i + 2
+                    };
+                    mat[i][j] = {
+                        type: rand[6],
+                        col: j,
+                        row: i
+                    };
+                    mat[i][j + 1] = {
+                        type: rand[7],
+                        col: j,
+                        row: i + 1
+                    };
+                    mat[i][j + 2] = {
+                        type: rand[8],
+                        col: j,
+                        row: i + 2
+                    };
+                    j += 2;
+                }
+
+                continue;
+
+
+            } else {
+                tile.type = -1;
+            }
+
+            mat[i][j] = tile;
+
+
+
+
+        }
+
+        if (i === dirtLevel - 2) {
+            i -= 2;
+
+        };
+
+    }
+    console.log(mat);
+    return mat;
+}
+
+//return mat of 3*3 of environment options
+getRandom9 = () => {
+    const kind = Math.floor((Math.random() * 6));
+
+    switch (kind) {
+        case 0:
+            return [2, 2, 2, 2, 2, 2, -1, 3, -1]; //tree
+        case 1:
+            return [-1, -1, -1, -1, -1, -1, 4, 4, -1]; //empty
+        case 2:
+            return [-1, -1, -1, -1, 2, -1, 2, 2, 2]; //empty
+
+        case 3:
+            return [-1, 2, -1, -1, 3, 4, -1, 3, 4]; //tree
+        case 4:
+            return [-1, -1, -1, 4, 4, 4, 4, 4, 4]; //tree
+
+        default:
+            return [-1, -1, -1, -1, -1, -1, -1, -1, -1]; //empty
+
+    }
+
+}
+
+const updateLastMindedTIle = (type) => {
+    state.lastMindedTile = type;
+    lastMindedTileElement.dataset.type = type;
+}
+//validate tool can mine element
+const validTool = (type, selectedTool) => {
+    switch (selectedTool) {
+        case 0: //p0-pickaxe => rock(4)i
+            if (type == 4) return true;
+            break;
+        case 1: // 1-shovel => dirt,dirt-grass(0,1)
+            if (type == 0 || type == 1) return true;
+            break;
+        case 2: // 2-axe => leaves,wood(2,3) 
+            if (type == 2 || type == 3) return true;
+            break;
+        default:
+            console.error("invalid tool number");
+            break;
+
+    }
+
+    return false;
+};
+
 //adds warning after invalid tool press;
 const toolwarning = () => {
-    tools.forEach( t => {
+    tools.forEach(t => {
         t.classList.add('warning');
-        setTimeout((t)=> {t.classList.remove('warning')}, 1000);
+        setTimeout(removeAllWarning, 1000);
     })
+}
+
+const removeAllWarning = () => {
+    tools.forEach(t => {
+        t.classList.remove('warning');
+    })
+}
+
+
+//resets all active tools
+const resetSelectedTools = () => {
+    tools.forEach(t => {
+        t.classList.remove('active');
+    })
+}
+
+
+
+//events
+const toolOnClickHandler = (e) => {
+    const tool = e.currentTarget;
+    const toolType = parseInt(tool.dataset.tool);
+    if (isNaN(toolType)) {
+        console.error('invalid tool type');
+        return;
+    }
+    resetSelectedTools();
+    tool.classList.add('active');
+    state.selectedTool = toolType;
+
 }
 
 const tileOnClickHandler = (e) => {
@@ -136,26 +313,6 @@ const tileOnClickHandler = (e) => {
 
 
 }
-//resets all active tools
-const resetSelectedTools = () => {
-    tools.forEach(t => {
-        t.classList.remove('active');
-    })
-}
-
-const toolOnClickHandler = (e) => {
-    const tool = e.currentTarget;
-    const toolType = parseInt(tool.dataset.tool);
-    if (isNaN(toolType)) {
-        console.error('invalid tool type');
-        return;
-    }
-    resetSelectedTools();
-    tool.classList.add('active');
-    state.selectedTool = toolType;
-
-}
-
 
 const addEventsToTools = (toolOnClickHandler) => {
     tools.forEach(tool => {
@@ -167,6 +324,6 @@ const addEventsToTools = (toolOnClickHandler) => {
 
 //main
 addEventsToTools(toolOnClickHandler);
-state.worldMatrix = createMatrix(12, 16);
-
+state.worldMatrix = createMatrix1(12, 16);
+console.log(state.worldMatrix);
 createWorld(state.worldMatrix, tileOnClickHandler);
