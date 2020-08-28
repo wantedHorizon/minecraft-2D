@@ -4,6 +4,9 @@ const TOOL_OPTION_NUMBER = 3;
 const gameTable = document.querySelector('.game-area__game');
 const lastMindedTileElement = document.querySelector('.tools-sidebar__lastMindedTile');
 const tools = document.querySelectorAll('.tool');
+const menu = document.querySelector('.menu');
+const startBtn = document.querySelector('.menu__btn');
+
 
 const state = {
     gameStart: false,
@@ -12,7 +15,9 @@ const state = {
     lastMindedTile: -1, //0-dirt , 1-dirt-grass , 2- leaves, 3- wood, 4-rock ,5-water
 }
 
-
+const startGame = () => {
+    menu.style.display = 'none';
+}
 const createWorld = (mat, tileOnClickHandler) => {
     for (let i = 0; i < mat.length; i++) {
         const line = document.createElement('div');
@@ -71,7 +76,7 @@ const createMatrix1 = (row, col) => {
     const dirtLevel = row - parseInt((Math.floor((Math.random() * 3) + 1) * 0.1) * row);
     // const upperGroundLevel = row - dirtLevel + parseInt((Math.floor((Math.random() * 4) + 1) * 0.1) * row);
 
-    
+
 
     for (let i = row - 1; i >= 0; i--) {
 
@@ -84,7 +89,7 @@ const createMatrix1 = (row, col) => {
                 tile.type = 0;
             } else if (i === dirtLevel - 1) {
                 tile.type = 1;
-                
+
             } else if (i === dirtLevel - 2) {
                 if (j >= col - 2) {
                     mat[i][j] = {
@@ -252,6 +257,21 @@ const resetSelectedTools = () => {
 
 
 //events
+const onStartGameClickHandler = (e) => {
+    menu.style.display = 'none';
+    gameTable.style.display = "block";
+
+    state.worldMatrix = createMatrix1(12, 16);
+    createWorld(state.worldMatrix, tileOnClickHandler);
+}
+
+const resetGame = (e) => {
+    menu.style.display = 'none';
+   
+    state.worldMatrix = createMatrix1(12, 16);
+    gameTable.innerHTML ="";
+    createWorld(state.worldMatrix, tileOnClickHandler);
+}
 const toolOnClickHandler = (e) => {
     const tool = e.currentTarget;
     const toolType = parseInt(tool.dataset.tool);
@@ -323,7 +343,8 @@ const addEventsToTools = (toolOnClickHandler) => {
 
 
 //main
+gameTable.style.display = "none";
 addEventsToTools(toolOnClickHandler);
-state.worldMatrix = createMatrix1(12, 16);
-console.log(state.worldMatrix);
-createWorld(state.worldMatrix, tileOnClickHandler);
+startBtn.addEventListener('click', onStartGameClickHandler);
+document.querySelector('.reset').addEventListener('click',resetGame);
+
