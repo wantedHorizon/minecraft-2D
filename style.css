@@ -98,6 +98,7 @@ body {
     /* flex: 1; */
     height: 8vh;
     width: 8vh;
+    transition: background 0.8s ease-in-out;
     /* height: 50px; */
     background: lightblue no-repeat center center/cover;
 }
