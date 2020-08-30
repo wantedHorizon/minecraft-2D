@@ -73,7 +73,7 @@ const createMatrix = (row, col) => {
     }
 
 
-    const dirtLevel = row - parseInt((Math.floor((Math.random() * 3) + 1) * 0.1) * row);
+    const dirtLevel = row - parseInt((Math.floor((Math.random() * 4) ) * 0.1) * row);
     // const upperGroundLevel = row - dirtLevel + parseInt((Math.floor((Math.random() * 4) + 1) * 0.1) * row);
 
 
@@ -267,7 +267,10 @@ const onStartGameClickHandler = (e) => {
 
 const resetGame = (e) => {
     menu.style.display = 'none';
-   
+    state.lastMindedTile = -1;
+    state.selectedTool = -1;
+    resetSelectedTools();
+    lastMindedTileElement.dataset.type = -1;
     state.worldMatrix = createMatrix(12, 16);
     gameTable.innerHTML ="";
     createWorld(state.worldMatrix, tileOnClickHandler);
