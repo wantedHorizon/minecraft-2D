@@ -10,7 +10,7 @@ state = {
     worldMatrix: [rows][cols],
     startGame: on/off,
     selectedTool: {0-3},
-    lastMindedTile: {0 -3}; // will be improved to array
+    lastMindedTile: {0-5}; // will be improved to array
 
 
     
@@ -47,9 +47,11 @@ each tile will get  onClick event listener. ``
 ``` 
 body {
     <div class="wrapper">
-        <div class="game-area"> 
+       <div class="navbar"><button class="reset">Reset Game</button></div>
+        <div class="game-area">
 
-        <div class"row"> 
+            <div class="game-area__game">
+              <div class"row"> 
 
             {<div 
                 class="tile" 
@@ -59,6 +61,12 @@ body {
             > 
             </div> 
             } * 
+            </div>
+            <div class="menu">
+                <button class="menu__btn">Start Game</button>
+            </div>
+
+      
 
          </div>
         </div>
@@ -77,7 +85,7 @@ body {
  * data-set : 
      - data-row: location i
      - data-col : location j
-     - data-type: { 0-sky, 1-dirt, 2-tree , 3-rock }
+     - data-type: { -1-sky, 0-dirt, 1-dirt grass, 2-leaves, 3- wood , 4-rock, 5-water }
 
 
 

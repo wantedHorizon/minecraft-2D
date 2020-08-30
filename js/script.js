@@ -40,27 +40,27 @@ const createWorld = (mat, tileOnClickHandler) => {
     }
 }
 
+// const createMatrix = (row, col) => {
+//     const mat = [];
+//     for (let i = 0; i < row; i++) {
+//         const line = [];
+
+//         for (let j = 0; j < col; j++) {
+//             const tile = {};
+
+//             tile.type = Math.floor((Math.random() * TILE_OPTION_NUMBER) - 1);
+//             tile.row = i;
+//             tile.col = j;
+
+//             line.push(tile);
+//         }
+//         mat.push(line);
+
+//     }
+//     return mat;
+// }
+
 const createMatrix = (row, col) => {
-    const mat = [];
-    for (let i = 0; i < row; i++) {
-        const line = [];
-
-        for (let j = 0; j < col; j++) {
-            const tile = {};
-
-            tile.type = Math.floor((Math.random() * TILE_OPTION_NUMBER) - 1);
-            tile.row = i;
-            tile.col = j;
-
-            line.push(tile);
-        }
-        mat.push(line);
-
-    }
-    return mat;
-}
-
-const createMatrix1 = (row, col) => {
 
     let mat = [];
     for (let i = 0; i < row; i++) {
@@ -95,17 +95,17 @@ const createMatrix1 = (row, col) => {
                     mat[i][j] = {
                         type: -1,
                         col: j,
-                        row: j
+                        row: i
                     };
                     mat[i - 1][j] = {
                         type: -1,
-                        col: j - 1,
-                        row: j
+                        col: j ,
+                        row: i -1
                     };
                     mat[i - 2][j] = {
                         type: -1,
-                        col: j - 2,
-                        row: j
+                        col: j ,
+                        row: i -2
                     };
 
                 } else {
@@ -113,33 +113,33 @@ const createMatrix1 = (row, col) => {
                     // console.log("rand",rand);
                     mat[i - 2][j] = {
                         type: rand[0],
-                        col: j - 2,
-                        row: i
+                        col: j ,
+                        row: i -2
                     };
                     mat[i - 2][j + 1] = {
                         type: rand[1],
-                        col: j - 2,
-                        row: i + 1
+                        col: j + 1,
+                        row: i - 2
                     };
                     mat[i - 2][j + 2] = {
                         type: rand[2],
-                        col: j - 2,
-                        row: i + 2
+                        col: j + 2,
+                        row: i - 2
                     };
                     mat[i - 1][j] = {
                         type: rand[3],
-                        col: j - 1,
-                        row: i
+                        col: j ,
+                        row: i -1
                     };
                     mat[i - 1][j + 1] = {
                         type: rand[4],
-                        col: j - 1,
-                        row: i + 1
+                        col: j + 1,
+                        row: i - 1
                     };
                     mat[i - 1][j + 2] = {
                         type: rand[5],
-                        col: j - 1,
-                        row: i + 2
+                        col: j +2,
+                        row: i -1
                     };
                     mat[i][j] = {
                         type: rand[6],
@@ -148,13 +148,13 @@ const createMatrix1 = (row, col) => {
                     };
                     mat[i][j + 1] = {
                         type: rand[7],
-                        col: j,
-                        row: i + 1
+                        col: j+1,
+                        row: i 
                     };
                     mat[i][j + 2] = {
                         type: rand[8],
-                        col: j,
-                        row: i + 2
+                        col: j +2,
+                        row: i 
                     };
                     j += 2;
                 }
@@ -261,14 +261,14 @@ const onStartGameClickHandler = (e) => {
     menu.style.display = 'none';
     gameTable.style.display = "block";
 
-    state.worldMatrix = createMatrix1(12, 16);
+    state.worldMatrix = createMatrix(12, 16);
     createWorld(state.worldMatrix, tileOnClickHandler);
 }
 
 const resetGame = (e) => {
     menu.style.display = 'none';
    
-    state.worldMatrix = createMatrix1(12, 16);
+    state.worldMatrix = createMatrix(12, 16);
     gameTable.innerHTML ="";
     createWorld(state.worldMatrix, tileOnClickHandler);
 }
